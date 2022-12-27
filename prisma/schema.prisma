@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Superuser {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+
+  @@map("superuser")
+}
+
+model Employee {
+  id    String @id @default(uuid())
+  name  String
+  cpf   String @unique
+  cards Card[]
+
+  @@map("employee")
+}
+
+model Card {
+  id        String   @id @default(uuid())
+  owner_cpf String
+  type      String
+  owner     Employee @relation(fields: [owner_cpf], references: [cpf])
+  name      String
+  serial    String   @unique
+
+  @@map("card")
+}
