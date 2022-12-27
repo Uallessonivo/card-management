@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/database/prisma.service'
 import { CreateSuperuserDTO } from '../../dto/create-superuser.dto'
 
@@ -14,7 +14,7 @@ export class CreateSuperuserService {
     })
 
     if (userExists) {
-      throw new BadRequestException('User already exists')
+      throw new Error()
     }
 
     await this.prisma.superuser.create({

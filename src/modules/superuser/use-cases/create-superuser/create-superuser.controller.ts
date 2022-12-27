@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { BadRequestException, Body, Controller, Post } from '@nestjs/common'
 import { CreateSuperuserService } from './create-superuser.service'
 import { CreateSuperuserDTO } from '../../dto/create-superuser.dto'
 
@@ -10,6 +10,10 @@ export class CreateSuperuserController {
 
   @Post()
   async createSuperuser(@Body() data: CreateSuperuserDTO) {
-    return this.createSuperuserService.create(data)
+    try {
+      await this.createSuperuserService.create(data)
+    } catch (error) {
+      throw new BadRequestException('User already exists')
+    }
   }
 }
