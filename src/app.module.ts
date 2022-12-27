@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common'
+import { SuperuserModule } from './modules/superuser/superuser.module'
 
 @Module({
-  imports: [],
+  imports: [SuperuserModule],
+  providers: [],
 })
 export class AppModule {}
