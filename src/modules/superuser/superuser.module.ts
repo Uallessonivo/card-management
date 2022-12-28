@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common'
-import { CreateSuperuserModule } from './use-cases/create-superuser/create-superuser.module'
+import { SuperuserService } from './superuser.service'
+import { SuperuserController } from './superuser.controller'
+import { PrismaService } from 'src/database/prisma.service'
 
 @Module({
-  controllers: [],
-  providers: [],
-  imports: [CreateSuperuserModule],
+  controllers: [SuperuserController],
+  providers: [SuperuserService, PrismaService],
 })
 export class SuperuserModule {}
